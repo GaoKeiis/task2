@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body ng-app="app" ng-controller="int">
+<header class="head">
+    <div class="head-icon">
+        <i class="iconfont icon-fanhui f20"></i>
+    </div>
+    <h1>订单支付</h1>
+
+    <div class="head-icons">
+        <i class="iconfont icon-yingyongzhongxin f20"></i>
+    </div>
+</header>
+<section class="main">
+    <div class="main-title">
+        <h3>路飞</h3>
+
+        <p>138****888</p>
+    </div>
+    <div class="main-dizhi">
+        <div class="head-icon">
+            <i class="iconfont icon-weizhi-xianxing"></i>
+        </div>
+        <p>
+            北京市海淀区知春路北京市海淀区知春路北京市海淀区
+            知春路
+        </p>
+
+        <div class="head-icons">
+            <i class="iconfont icon-gengduo1 f20"></i>
+        </div>
+    </div>
+    <div class="main-color"></div>
+    <div class="main-content">
+        <div class="content-title">
+            <div class="head-icon">
+                <i class="iconfont icon-dianpu-xianxing f20"></i>
+            </div>
+            <h3>恒之然旗舰店</h3>
+        </div>
+        <div class="cont">
+            <dl>
+                <dt><img src="images/icons/icons1.png" alt="icons1"></dt>
+                <dd>
+                    <h4 class="nowrap">维维嚼益嚼水果大豆棒橙味维维嚼
+                        益嚼水果大豆棒橙味...</h4>
+
+                    <p>￥{{rice}}</p>
+                    <span >¥1000.00</span>
+
+                    <div class="ipt">
+                        <b ng-click="see()">-</b>
+                        <span ng-bind="count"></span>
+                        <b ng-click="home()">+</b>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <div class="price">
+            <p>商品总金额: <span>￥{{near}}</span></p>
+
+            <p>运费: <span>￥10</span></p>
+
+            <p>总额(含运费): <span class="text-red f14">￥{{total}}</span></p>
+        </div>
+    </div>
+    <div class="tu" >
+        <p>余额支付 ¥{{month}}</p>
+        <label class="toggle" ng-checked="{{figls}}">
+            <input type="checkbox">
+            <div class="mar green" ng-click="bonu()">
+                <div class="icon"></div>
+            </div>
+        </label>
+    </div>
+    <div class="tu" >
+        <p>奖金支付 ¥{{bonus}}</p>
+        <label class="toggle" ng-checked="{{figl}}">
+            <input type="checkbox">
+            <div class="mar green" ng-click="bonusa()">
+                <div class="icon"></div>
+            </div>
+        </label>
+    </div>
+</section>
+<footer class="foot">
+    <p>总计：<span>¥{{sum}}</span></p>
+    <b>(含运费)</b>
+    <span class="bg-red" ng-click="sub()">提交订单</span>
+</footer>
+</body>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script>
+    var app = angular.module("app", []);
+    app.controller("int", function ($scope) {
+//        单价
+        $scope.rice = 988;
+//        总金额
+        $scope.near = 988;
+//        奖金
+        $scope.bonus = 100;
+//        总计
+        $scope.sum = 998;
+//        数量
+        $scope.count = 1;
+//        总额
+        $scope.total = 998;
+//        余额
+        $scope.month = 100;
+//        点击减号
+        $scope.figl = false;
+        $scope.figls = false;
+        $scope.see = function () {
+            if ($scope.count >1) {
+                $scope.count--;
+                $scope.near = 988 * $scope.count;
+                $scope.total = $scope.near+10;
+                $scope.sum = $scope.total;
+            }else{
+                return;
+            }
+        };
+//        点击加号
+        $scope.home = function () {
+            if ($scope.count < 10) {
+                $scope.count++;
+                $scope.near = 988 * $scope.count;
+                $scope.total = $scope.near+10;
+                $scope.sum = $scope.total;
+            } else {
+                alert("最多选择10件");
+                return;
+            }
+        };
+//点击奖金按钮
+        $scope.bonusa = function (){
+            if(!$scope.figl){
+                $scope.sum = $scope.sum-100;
+                $scope.figl = true;
+            }else{
+                $scope.sum = $scope.sum+100;
+                $scope.figl = !$scope.figl
+
+            }
+        };
+//        点击余额支付
+        $scope.bonu = function (){
+            if(!$scope.figls){
+                $scope.sum = $scope.sum-100;
+                $scope.figls = true;
+            }else{
+                $scope.sum = $scope.sum+100;
+                $scope.figls = !$scope.figl
+
+            }
+        };
+        $scope.sub = function(){
+            alert("恭喜支付成功")
+        };
+    });
+
+</script>
+</html>
